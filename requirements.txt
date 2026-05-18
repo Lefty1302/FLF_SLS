@@ -1,0 +1,33 @@
+# Python 3.8 environment for FLForensics Obj 3 replication.
+# Build the env with:
+#   conda create -n flforensics python=3.8 -y && conda activate flforensics
+#   pip install -r requirements.txt
+
+# MXNet — paper uses 1.9.1 built against CUDA 11.2.
+# Wheel exists for Python 3.7/3.8/3.9 only. CUDA 11.2 wheels run on
+# CUDA 11.x runtimes (forward-compat); do NOT use a CUDA 12 base image.
+mxnet-cu112==1.9.1
+
+# numpy must be <1.20 for mxnet 1.9.1 (uses np.warnings, removed in 1.20).
+numpy==1.19.5
+
+# Core scientific stack
+scipy
+scikit-learn
+matplotlib
+pandas
+tqdm
+seaborn
+
+# Detection clustering. Upstream env pins 0.8.27 which fails to build against
+# modern Cython 3.x — latest hdbscan has wheels and the same API for what
+# cluster.py uses (HDBSCAN(min_cluster_size=, min_samples=, metric=)).
+hdbscan
+
+# Sentiment140 / text-attack deps. Not strictly needed for Obj 3 (CIFAR-10
+# only), but cheap to install and matches the upstream environment.
+gluonnlp==0.8.3
+tweet-preprocessor
+nltk
+regex
+joblib
