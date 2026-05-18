@@ -8,8 +8,10 @@
 # CUDA 11.x runtimes (forward-compat); do NOT use a CUDA 12 base image.
 mxnet-cu112==1.9.1
 
-# numpy must be <1.20 for mxnet 1.9.1 (uses np.warnings, removed in 1.20).
-numpy==1.19.5
+# numpy: must satisfy mxnet (>1.16, <2.0) AND hdbscan 0.8.33 (>=1.20).
+# 1.21.6 sits in the overlap and still has np.warnings (used in train.py,
+# removed in numpy 1.25+).
+numpy==1.21.6
 
 # Core scientific stack
 scipy
