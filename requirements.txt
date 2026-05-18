@@ -1,5 +1,5 @@
 # Python 3.8 environment for FLForensics Obj 3 replication.
-# Build the env with:
+# Build with:
 #   conda create -n flforensics python=3.8 -y && conda activate flforensics
 #   pip install -r requirements.txt
 
@@ -19,10 +19,11 @@ pandas
 tqdm
 seaborn
 
-# Detection clustering. Upstream env pins 0.8.27 which fails to build against
-# modern Cython 3.x — latest hdbscan has wheels and the same API for what
-# cluster.py uses (HDBSCAN(min_cluster_size=, min_samples=, metric=)).
-hdbscan
+# Detection clustering. Upstream pin (0.8.27) fails to build against modern
+# Cython 3.x. Latest hdbscan (0.8.36+) dropped Python 3.8 wheels — pin to
+# 0.8.33, the newest version that still ships a 3.8 wheel. API is identical
+# for what cluster.py calls.
+hdbscan==0.8.33
 
 # Sentiment140 / text-attack deps. Not strictly needed for Obj 3 (CIFAR-10
 # only), but cheap to install and matches the upstream environment.
